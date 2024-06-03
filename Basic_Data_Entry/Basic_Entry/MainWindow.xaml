@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Basic_Entry"
         mc:Ignorable="d"
-        Title="Basic Entry" Height="225" Width="425"
+        Title="Basic Entry" Height="450" Width="550"
         Background="DimGray">
     <Grid>
         <StackPanel Margin="5">
@@ -16,6 +16,7 @@
             <TextBox x:Name="AgeTextBox" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
 
             <Button Content="Submit" HorizontalAlignment="Center" Background="LightCyan"  Margin="0,30,0,0" VerticalAlignment="Top" Height="20" Width="75" Click="SaveButton_Click"/>
+            <DataGrid x:Name="DataGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Background="LightGray" Margin="0,20,0,0" Height="200" Width="500" AutoGenerateColumns="True"/>
         </StackPanel>
     </Grid>
 </Window>
