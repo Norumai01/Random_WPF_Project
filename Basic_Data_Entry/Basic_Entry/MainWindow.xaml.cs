@@ -28,15 +28,27 @@ namespace Basic_Entry
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            string name = NameTextBox.Text;
-            if (int.TryParse(AgeTextBox.Text, out int age))
+            string name = NameTextBox.Text.Trim();
+            if (ValidateInputs(name, AgeTextBox.Text, out int age))
             {
                 MessageBox.Show("Data saved successfully.");
             }
-            else
+        }
+
+        private bool ValidateInputs(string name, string ageText, out int age) 
+        {
+            age = 0;
+            if (string.IsNullOrEmpty(name))
+            {
+                MessageBox.Show("Enter a valid name.");
+                return false;
+            }
+            if (!int.TryParse(ageText, out age) || age <= 0)
             {
                 MessageBox.Show("Please enter a valid age.");
+                return false;
             }
+            return true;
         }
     }
 }

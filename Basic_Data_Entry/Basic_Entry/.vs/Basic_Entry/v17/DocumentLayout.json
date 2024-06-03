@@ -18,11 +18,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
@@ -33,8 +37,7 @@
               "ToolTip": "C:\\Users\\jnguy\\Documents\\GitHub\\Random_WPF_Project\\Basic_Data_Entry\\Basic_Entry\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-02T23:08:17.035Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-02T23:08:17.035Z"
             },
             {
               "$type": "Document",
@@ -44,7 +47,7 @@
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\jnguy\\Documents\\GitHub\\Random_WPF_Project\\Basic_Data_Entry\\Basic_Entry\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAARAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAC0AAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-02T23:08:13.093Z",
               "EditorCaption": ""
