@@ -11,23 +11,45 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System;
 using System.IO;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Basic_Entry
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private string ExcelFilePath; 
+        private string ExcelFilePath;
+        private ObservableCollection<Person> people;
+        public ObservableCollection<Person> People
+        {
+            get => people;
+            set
+            {
+                if (people != value)
+                {
+                    people = value;
+                    OnPropertyChanged(nameof(People));
+                }
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             // Save data to an excel sheet called Test, in the Documents Folder.
             ExcelFilePath = System.IO.Path.Combine(documentsPath, "Test.xlsx");
             EnsureExcelFileExists();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            People = ReadExcelData();
+            DataGrid.ItemsSource = People;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -89,6 +111,45 @@ namespace Basic_Entry
                     package.Save();
                 }
             }
+        }
+        public ObservableCollection<Person> ReadExcelData()
+        {
+            var data = new ObservableCollection<Person>();
+            FileInfo fileInfo = new FileInfo(ExcelFilePath);
+
+            try
+            {
+                using (ExcelPackage package = new ExcelPackage(fileInfo))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets["Sheet1"];
+                    if (worksheet == null)
+                    {
+                        return data;
+                    }
+
+                    int rowCount = worksheet.Dimension.Rows;
+                    for (int row = 2; row < rowCount; row++)
+                    {
+                        var person = new Person
+                        {
+                            Name = worksheet.Cells[row, 1].Value?.ToString(),
+                            Age = int.Parse(worksheet.Cells[row, 2].Value?.ToString() ?? "0")
+                        };
+                        data.Add(person);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading Excel file: {ex.Message}");
+            }
+            return data;
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
